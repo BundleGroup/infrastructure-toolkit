@@ -1,4 +1,4 @@
-package gg.bundlegroup.paper;
+package gg.bundlegroup.messagebus.paper;
 
 import gg.bundlegroup.messagebus.common.MessageBusPlugin;
 import org.bukkit.plugin.java.JavaPlugin;

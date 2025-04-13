@@ -19,6 +19,7 @@ public class RabbitMQMessageBusProvider implements MessageBusProvider {
 
     @Override
     public MessageBus create(Logger logger, ConfigurationNode config) throws Exception {
+        System.out.println("Creating RabbitMQ MessageBus");
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(config.node("host").getString("localhost"));
 
