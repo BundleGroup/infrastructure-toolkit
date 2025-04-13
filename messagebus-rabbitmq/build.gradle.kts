@@ -16,6 +16,6 @@ java {
 }
 
 dependencies {
-    compileOnlyApi("org.jetbrains:annotations:23.1.0")
-    compileOnlyApi("org.slf4j:slf4j-api:2.0.5")
+    implementation(project(":messagebus-common"))
+    implementation("com.rabbitmq:amqp-client:5.25.0")
 }
