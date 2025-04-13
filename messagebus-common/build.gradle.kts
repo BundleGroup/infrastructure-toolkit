@@ -51,3 +51,7 @@ tasks {
         isPreserveFileTimestamps = false
     }
 }
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
