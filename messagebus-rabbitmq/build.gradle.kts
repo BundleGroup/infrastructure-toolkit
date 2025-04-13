@@ -14,3 +14,7 @@ dependencies {
     implementation(project(":messagebus-common"))
     implementation("com.rabbitmq:amqp-client:5.25.0")
 }
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
