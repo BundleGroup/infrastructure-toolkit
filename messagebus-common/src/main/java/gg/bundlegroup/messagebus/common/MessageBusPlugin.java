@@ -40,7 +40,6 @@ public class MessageBusPlugin {
             }
 
             messageBus = bus;
-            logger.info(messageBus.toString());
 
             MessageBus.Holder.setInstance(messageBus);
         } catch (Exception e) {
