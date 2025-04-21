@@ -25,21 +25,23 @@ public class MessageBusPlugin {
                     .file(new File(dataFolder, "config.yml"))
                     .build();
             CommentedConfigurationNode config = loader.load();
-            String type = config.node("type").getString("rabbitmq");
             MessageBus bus = null;
-            logger.info("Pre Loop");
+            String type = config.node("type").getString("rabbitmq");
             for (MessageBusProvider provider : ServiceLoader.load(MessageBusProvider.class, getClass().getClassLoader())) {
-//                if (provider.name().equals(type)) {
-//                    bus = provider.create(logger, config.node(type));
-//                }
-                logger.info("Provider: {}", provider.name());
+                if (provider.name().equals(type)) {
+                    logger.info("Using MessageBus {}", provider.name());
+                    bus = provider.create(logger, config.node(type));
+                }
             }
-            logger.info("Post Loop");
+
             if (bus == null) {
                 logger.error("Unknown message bus type: {}", type);
                 return false;
             }
+
             messageBus = bus;
+
+            logger.info("Setting instance");
             MessageBus.Holder.setInstance(messageBus);
         } catch (Exception e) {
             logger.error("Failed to initialize message bus", e);

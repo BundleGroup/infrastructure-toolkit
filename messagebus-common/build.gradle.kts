@@ -9,13 +9,10 @@ plugins {
 group = "gg.bundlegroup"
 version = property("version")!!
 
+
+
 repositories {
     mavenCentral()
-}
-
-java {
-    withSourcesJar()
-    withJavadocJar()
 }
 
 dependencies {

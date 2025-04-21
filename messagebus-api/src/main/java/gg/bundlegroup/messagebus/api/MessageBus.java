@@ -4,6 +4,8 @@ import gg.bundlegroup.messagebus.api.generic.Subscription;
 import gg.bundlegroup.messagebus.api.messages.Message;
 import org.jetbrains.annotations.ApiStatus;
 
+import java.util.logging.Logger;
+
 /**
  * Core entry point for interacting with the message bus system.
  *
@@ -21,6 +23,8 @@ public interface MessageBus extends AutoCloseable {
      * @return the active message bus instance
      */
     static MessageBus get() {
+        boolean isNull = Holder.instance == null;
+        Logger.getGlobal().info("Getter called! Is message bus instance null?"+ isNull);
         return Holder.instance;
     }
 
@@ -44,7 +48,7 @@ public interface MessageBus extends AutoCloseable {
      * <p>This class is intended for internal use only.</p>
      */
     @ApiStatus.Internal
-    class Holder {
+    static class Holder {
         static MessageBus instance;
 
         /**
@@ -53,6 +57,7 @@ public interface MessageBus extends AutoCloseable {
          * @param instance the message bus implementation to use
          */
         public static void setInstance(MessageBus instance) {
+            Logger.getGlobal().info("Setting MessageBus instance");
             Holder.instance = instance;
         }
     }

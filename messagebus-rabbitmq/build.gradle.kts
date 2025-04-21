@@ -1,6 +1,12 @@
 plugins {
     `java-library`
     `maven-publish`
+    id("com.github.harbby.gradle.serviceloader") version "1.1.9"
+
+}
+
+serviceLoader {
+    serviceInterface("gg.bundlegroup.messagebus.common.MessageBusProvider")
 }
 
 group = "gg.bundlegroup"
