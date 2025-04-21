@@ -40,8 +40,8 @@ public class MessageBusPlugin {
             }
 
             messageBus = bus;
+            logger.info(messageBus.toString());
 
-            logger.info("Setting instance");
             MessageBus.Holder.setInstance(messageBus);
         } catch (Exception e) {
             logger.error("Failed to initialize message bus", e);

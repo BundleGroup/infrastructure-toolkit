@@ -24,7 +24,6 @@ public interface MessageBus extends AutoCloseable {
      */
     static MessageBus get() {
         boolean isNull = Holder.instance == null;
-        Logger.getGlobal().info("Getter called! Is message bus instance null?"+ isNull);
         return Holder.instance;
     }
 
@@ -57,7 +56,6 @@ public interface MessageBus extends AutoCloseable {
          * @param instance the message bus implementation to use
          */
         public static void setInstance(MessageBus instance) {
-            Logger.getGlobal().info("Setting MessageBus instance");
             Holder.instance = instance;
         }
     }

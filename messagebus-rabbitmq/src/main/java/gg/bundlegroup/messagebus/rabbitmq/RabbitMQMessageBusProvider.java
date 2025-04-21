@@ -36,7 +36,6 @@ public class RabbitMQMessageBusProvider implements MessageBusProvider {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        logger.info("Works");
         return new RabbitMQMessageBus(connection, channel);
     }
 }
