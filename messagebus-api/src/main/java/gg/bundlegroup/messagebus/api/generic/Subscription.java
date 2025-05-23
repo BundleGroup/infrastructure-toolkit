@@ -52,6 +52,6 @@ public interface Subscription extends Closeable {
          *
          * @return the constructed subscription
          */
-        Subscription build();
+        Subscription build() throws Exception;
     }
 }

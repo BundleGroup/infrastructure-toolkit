@@ -23,7 +23,6 @@ public interface MessageBus extends AutoCloseable {
      * @return the active message bus instance
      */
     static MessageBus get() {
-        boolean isNull = Holder.instance == null;
         return Holder.instance;
     }
 

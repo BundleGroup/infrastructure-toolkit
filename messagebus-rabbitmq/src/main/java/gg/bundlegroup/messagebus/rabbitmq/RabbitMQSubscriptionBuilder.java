@@ -27,7 +27,12 @@ public class RabbitMQSubscriptionBuilder implements Subscription.Builder {
     }
 
     @Override
-    public Subscription build() {
-        return null;
+    public Subscription build() throws Exception {
+        return new RabbitMQSubscription(
+                this.channel,
+                subject,
+                "fanout",
+                listener
+        );
     }
 }

@@ -27,15 +27,27 @@ publishing {
         }
     }
 
-    repositories {
-        mavenLocal()
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/BundleGroup/infrastructure-toolkit")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+    publishing {
+        publications {
+            repositories {
+                maven {
+                    name = "atlas"
+                    url = uri("https://repo.theatlas.gg/releases")
+                    credentials(PasswordCredentials::class.java)
+                }
             }
         }
     }
+
+//    repositories {
+//        mavenLocal()
+//        maven {
+//            name = "GitHubPackages"
+//            url = uri("https://maven.pkg.github.com/BundleGroup/infrastructure-toolkit")
+//            credentials {
+//                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+//                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+//            }
+//        }
+//    }
 }

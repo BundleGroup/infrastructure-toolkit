@@ -10,6 +10,7 @@ import org.spongepowered.configurate.ConfigurationNode;
 
 import java.util.AbstractMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class RabbitMQMessageBusProvider implements MessageBusProvider {
     @Override
@@ -19,7 +20,6 @@ public class RabbitMQMessageBusProvider implements MessageBusProvider {
 
     @Override
     public MessageBus create(Logger logger, ConfigurationNode config) throws Exception {
-        logger.info("Creating RabbitMQ MessageBus");
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(config.node("host").getString("localhost"));
 
@@ -34,8 +34,16 @@ public class RabbitMQMessageBusProvider implements MessageBusProvider {
         factory.setPassword(credentials.getValue());
 
         Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
+        Optional<Channel> channel = connection.openChannel();
 
-        return new RabbitMQMessageBus(connection, channel);
+        if (channel.get() != null) {
+            logger.info("Channel exists, connecting..., {}", channel.get().getChannelNumber());
+            return new RabbitMQMessageBus(connection, channel.get());
+        } else {
+            logger.info("Channel does not yet exist, creating new channel.");
+            Channel createdChannel = connection.createChannel();
+            return new RabbitMQMessageBus(connection, createdChannel);
+        }
+
     }
 }

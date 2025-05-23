@@ -46,7 +46,7 @@ public class RabbitMQMessageBuilder implements Message.Builder {
                 content,
                 subject,
                 replyTo,
-                ""
+                "fanout"
         );
     }
 }

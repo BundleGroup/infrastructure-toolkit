@@ -88,7 +88,7 @@ public class RabbitMQMessage implements Message {
      */
     @Override
     public void publish() throws IOException {
-        channel.exchangeDeclare(subject, exchangeType);
-        channel.basicPublish(subject, "", null, this.data());
+        channel.exchangeDeclare(subject, exchangeType, true);
+        channel.basicPublish("", subject, null, this.data());
     }
 }
